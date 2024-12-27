@@ -78,7 +78,7 @@ void cetakDataKelas() {
 
     cout << "\nDATA KELAS YANG SUDAH DI TAMBAHKAN !!\n";
     cout << string(85, '-') << endl; // Garis pemisah
-    cout << left << setw(5) << "No"
+    cout << left << setw(5) << "No."
             << setw(7) << "ID"
             << setw(20) << "Nama Kelas"
             << setw(25) << "Wali Kelas"
@@ -118,22 +118,26 @@ void cetakDataSiswa(vector<Siswa>& data) {
   }
 
   cout << "\nDATA SISWA YANG SUDAH DI TAMBAHKAN !!\n";
-  cout << string(85, '-') << endl; // Garis pemisah
-  cout << left << setw(25) << "Nama Siswa"
+  cout << string(95, '-') << endl; // Garis pemisah
+  cout << left << setw(5) << "No."
+          << setw(25) << "Nama Siswa"
           << setw(12) << "NIS"
           << setw(15) << "Jenis Kelamin"
           << setw(15) << "ttl"
           << setw(15) << "Kelas" << endl;
-  cout << string(85, '-') << endl; // Garis pemisah
+  cout << string(95, '-') << endl; // Garis pemisah
+
+  int nomor = 1;
 
   for (const auto& Siswa : data) {
-      cout << setw(25) << Siswa.nama
-              << setw(12) << Siswa.nis
-              << setw(15) << Siswa.jk
-              << setw(15) << Siswa.ttl
-              << setw(15) << Siswa.kelas << endl;
+      cout << setw(5) << nomor++
+          << setw(25) << Siswa.nama
+          << setw(12) << Siswa.nis
+          << setw(15) << Siswa.jk
+          << setw(15) << Siswa.ttl
+          << setw(15) << Siswa.kelas << endl;
   }
-  cout << string(85, '-') << endl; // Garis pemisah
+  cout << string(95, '-') << endl; // Garis pemisah
 }
 
 //! FUNGSI UNTUK MENYIMPAN DATA KE FILE
