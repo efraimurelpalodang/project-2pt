@@ -81,7 +81,7 @@ void cetakDataKelas(vector<Kelas>& data) {
 
   cout << "\nDATA KELAS YANG SUDAH DI TAMBAHKAN !!\n";
   cout << string(85, '-') << endl; // Garis pemisah
-  cout << left << setw(15) << "ID Kelas"
+  cout << left << setw(10) << "ID"
           << setw(20) << "Nama Kelas"
           << setw(20) << "Wali Kelas"
           << setw(15) << "Jumlah Siswa"
@@ -89,13 +89,12 @@ void cetakDataKelas(vector<Kelas>& data) {
   cout << string(85, '-') << endl; // Garis pemisah
 
   for (const auto& kelas : data) {
-      cout << setw(15) << kelas.id
+      cout << setw(10) << kelas.id
               << setw(20) << kelas.namaKelas
               << setw(20) << kelas.wali
               << setw(15) << kelas.jumlahSiswa
               << setw(15) << kelas.tahunAjaran << endl;
   }
-   cin.ignore(); // Mengabaikan newline yang tersisa di buffer
   cout << string(85, '-') << endl; // Garis pemisah
 }
 
