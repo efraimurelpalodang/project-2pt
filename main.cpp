@@ -60,11 +60,12 @@ void ambilDataSiswa() {
     string nama, nis, jk, ttl, kelas;
 
     // Membaca data dari file
-    while (getline(data, nama, '\t')) {  // Membaca ID dan mengabaikan whitespace
-        getline(data, nis, '\t');  // Membaca nama kelas hingga tab
-        data >> jk >> ws;  // Membaca wali kelas dan mengabaikan whitespace
-        data >> ttl >> ws; // Membaca jumlah siswa dan mengabaikan whitespace
-        getline(data, kelas); // Membaca tahun ajaran (sampai akhir baris)
+    while (getline(data, nama, '\t')) {  // Membaca nama dan mengabaikan whitespace
+        getline(data, nis, '\t');  // Membaca nis kelas hingga tab
+        data >> jk >> ws;  // Membaca jk kelas dan mengabaikan whitespace
+        data >> ttl >> ws; // Membaca ttl dan mengabaikan whitespace
+        getline(data, kelas); // Membaca kelas (sampai akhir baris)
+
         // Menambahkan data ke vector dataKelas
         dataSiswa.push_back({nama, nis, jk, ttl, kelas});
     }
@@ -125,7 +126,7 @@ void cetakDataKelas() {
         getline(file, namaKelas, '\t');  // Membaca nama kelas hingga tab
         getline(file, wali, '\t');  // Membaca wali kelas hingga tab
         getline(file, jumlahSiswa, '\t');  // Membaca jumlah siswa hingga tab
-        file >> tahunAjaran >> ws; // Membaca tahun ajaran
+        file >> tahunAjaran >> ws; // Membaca tahun ajaran hingga akhir
 
         // Mencetak data kelas yang dibaca dari file
         cout<< setw(5)  << nomor++
@@ -262,7 +263,7 @@ void tambahDataKelas() {
 }
 
 void tambahDataSiswa() {
-  Siswa d; // membuat variable dari referensi objek kelas
+  Siswa d; // membuat variable dari referensi objek Siswa
   cin.ignore(); // Mengabaikan newline yang tersisa di buffer
   cout << "Masukkan Nama : "; getline(cin, d.nama);
   cout << "Masukkan NIS : "; getline(cin, d.nis);
@@ -471,17 +472,16 @@ int main() {
     case 1:
         // Mengelola data Kelas
         do {
-            // ambilDataKelas();
-            templateForm(28, "Kelas");
-            int pilihKelas;
-            cout << "Pilih menu: "; cin >> pilihKelas;
-            switch (pilihKelas) {
-                case 1: tambahDataKelas(); break;
-                case 2: ubahDataKelas(); break;
-                case 3: hapusDataKelas(); break;
-                case 4: cetakDataKelas(); break;
-                case 5: kembaliKeMenuUtama = true; break; // Kembali ke menu utama
-                default: cout << "Pilihan tidak valid!" << endl;
+          templateForm(28, "Kelas");
+          int pilihKelas;
+          cout << "Pilih menu: "; cin >> pilihKelas;
+          switch (pilihKelas) {
+              case 1: tambahDataKelas(); break;
+              case 2: ubahDataKelas(); break;
+              case 3: hapusDataKelas(); break;
+              case 4: cetakDataKelas(); break;
+              case 5: kembaliKeMenuUtama = true; break; // Kembali ke menu utama
+              default: cout << "Pilihan tidak valid!" << endl;
             }
         } while (!kembaliKeMenuUtama);  // Loop berlanjut hingga kembali ke menu utama
         break;
@@ -489,16 +489,16 @@ int main() {
     case 2:
         // Mengelola data Siswa
         do {
-            templateForm(28, "Siswa");
-            int pilihSiswa;
-            cout << "Pilih menu: "; cin >> pilihSiswa;
-            switch (pilihSiswa) {
-                case 1: tambahDataSiswa(); break;
-                case 2: ubahDataSiswa(); break;
-                case 3: hapusDataSiswa(); break;
-                case 4: cetakDataSiswa(dataSiswa); break;
-                case 5: kembaliKeMenuUtama = true; break; // Kembali ke menu utama
-                default: cout << "Pilihan tidak valid!" << endl;
+          templateForm(28, "Siswa");
+          int pilihSiswa;
+          cout << "Pilih menu: "; cin >> pilihSiswa;
+          switch (pilihSiswa) {
+              case 1: tambahDataSiswa(); break;
+              case 2: ubahDataSiswa(); break;
+              case 3: hapusDataSiswa(); break;
+              case 4: cetakDataSiswa(dataSiswa); break;
+              case 5: kembaliKeMenuUtama = true; break; // Kembali ke menu utama
+              default: cout << "Pilihan tidak valid!" << endl;
             }
         } while (!kembaliKeMenuUtama);  // Loop berlanjut hingga kembali ke menu utama
         break;
@@ -529,7 +529,7 @@ int main() {
     // Reset flag kembaliKeMenuUtama untuk loop berikutnya
     kembaliKeMenuUtama = false;
 
-  } while (pilih != 4);  // Loop kembali ke menu utama hingga pilih 3 untuk keluar
+  } while (pilih != 4);  // Loop kembali ke menu utama hingga pilih 4 untuk keluar
   
   return 0;
 }
