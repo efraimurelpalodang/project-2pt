@@ -95,7 +95,6 @@ void cetakDataKelas(vector<Kelas>& data) {
               << setw(15) << kelas.jumlahSiswa
               << setw(15) << kelas.tahunAjaran << endl;
   }
-   cin.ignore(); // Mengabaikan newline yang tersisa di buffer
   cout << string(85, '-') << endl; // Garis pemisah
 }
 
@@ -107,22 +106,22 @@ void cetakDataSiswa(vector<Siswa>& data) {
   }
 
   cout << "\nDATA SISWA YANG SUDAH DI TAMBAHKAN !!\n";
-  cout << string(70, '-') << endl; // Garis pemisah
-  cout << left << setw(15) << "Nama Siswa"
-          << setw(12) << "NIS"
-          << setw(15) << "Jenis Kelamin"
-          << setw(15) << "ttl"
-          << setw(15) << "Kelas" << endl;
-  cout << string(70, '-') << endl; // Garis pemisah
+  cout << string(85, '-') << endl; // Garis pemisah
+  cout << left << setw(15) << "ID Kelas"
+          << setw(20) << "Nama Kelas"
+          << setw(20) << "Wali Kelas"
+          << setw(15) << "Jumlah Siswa"
+          << setw(15) << "Tahun Ajaran" << endl;
+  cout << string(85, '-') << endl; // Garis pemisah
 
   for (const auto& Siswa : data) {
       cout << setw(15) << Siswa.nama
-              << setw(12) << Siswa.nis
-              << setw(15) << Siswa.jk
+              << setw(20) << Siswa.nis
+              << setw(20) << Siswa.jk
               << setw(15) << Siswa.ttl
               << setw(15) << Siswa.kelas << endl;
   }
-  cout << string(70, '-') << endl; // Garis pemisah
+  cout << string(85, '-') << endl; // Garis pemisah
 }
 
 //! FUNGSI UNTUK NAMBAH DATA
@@ -200,39 +199,22 @@ void ubahDataSiswa(vector<Siswa>& data) {
 
   Siswa& d = data[index - 1];
   cin.ignore(); // Mengabaikan newline yang tersisa di buffer
-  cout << "Masukkan nama Siswa : "; getline(cin, d.nama);
-  cout << "Masukkan NIS : "; getline(cin, d.nis);
-  cout << "Masukkan Jenis Kelamin : "; getline(cin, d.jk);
-  cout << "Masukkan ttl [tgl-bln-thn] : "; getline(cin, d.ttl);
-  cout << "Masukkan Kelas: "; getline(cin, d.kelas);
+  cout << "Masukkan ID Kelas: "; getline(cin, d.nama);
+  cout << "Masukkan Nama Kelas: "; getline(cin, d.nis);
+  cout << "Masukkan Wali Kelas: "; getline(cin, d.jk);
+  cout << "Masukkan Wali Kelas: "; getline(cin, d.ttl);
+  cout << "Masukkan Tahun Ajaran: "; getline(cin, d.kelas);
   cout << "Data berhasil di Ubah!" << endl;
 }
 
 // Fungsi untuk menghapus data
-void hapusDataKelas(vector<Kelas>& data) {
+template <typename T>
+void hapusData(vector<T>& data) {
     if (data.empty()) {
         cout << "Tidak ada data untuk dihapus!!" << endl;
         return;
     }
-    cetakDataKelas(data);
-    int index;
-    cout << "Masukkan data yang ingin dihapus (mulai dari 1): ";
-    cin >> index;
-    if (index < 1 || index > data.size()) {
-        cout << "Nomor tidak valid" << endl;
-        return;
-    }
-
-    data.erase(data.begin() + index - 1);
-    cout << "\nData Berhasil Dihapus, jangan lupa simpan perubahan!!" << endl;
-}
-
-void hapusDataSiswa(vector<Siswa>& data) {
-    if (data.empty()) {
-        cout << "Tidak ada data untuk dihapus!!" << endl;
-        return;
-    }
-    cetakDataSiswa(data);
+    // cetakDataKelas(data);
     int index;
     cout << "Masukkan data yang ingin dihapus (mulai dari 1): ";
     cin >> index;
@@ -247,7 +229,7 @@ void hapusDataSiswa(vector<Siswa>& data) {
 
 //! FUNGSI UNTUK MENYIMPAN DATA 
 void simpanDataKelas(vector<Kelas>& data) {
-  ofstream file("data/kelas.txt");
+  ofstream file("data/siswa.txt");
 
   for (const auto& item : data) {
     file << item.id << "\t"
@@ -276,82 +258,77 @@ void simpanDataSiswa(vector<Siswa>& data) {
   cout << "\nData Berhasil Disimpan kedalam file data/kelas.txt!!" << endl;
 }
 
+
 //! template form
 void templateForm(int a, string b) {
   cout << string(a,'-') << endl;
   cout << "Menu Pengelolaan Data "<< b << endl;
   cout << string(a,'-') << endl;
-  cout << "1. Tambah Data "<<b<<
-        "\n2. Ubah Data " <<b<<
-        "\n3. Hapus Data " <<b<<
-        "\n4. Tampilkan Data "<<b<<
-        "\n5. Simpan Perubahan Data "<<b<<
-        "\n6. Kembali ke menu utama\n";
+  cout << "1. Tambah Data\n2. Ubah Data\n3. Hapus Data\n4. Tampilkan Data\n5. Simpan Perubahan Data\n6. Kembali\n";
 }
+
 
 
 //! program Utama
 
 int main() {
-  int pilih;
-  bool kembaliKeMenuUtama = false;
+    int pilih;
+    bool kembaliKeMenuUtama = false;
 
-  do {
-  // Menu utama
-  cout << "===============================\n";
-  cout << "PROJEK MANAJEMEN DATA SEKOLAH\n";
-  cout << "===============================\n";
-  cout << "1. Data Kelas\n";
-  cout << "2. Data Siswa\n";
-  cout << "3. Keluar\n";
-  cout << "Pilih Menu [1-3]: "; 
-  cin >> pilih;
+    do {
+        // Menu utama
+    cout << "===============================\n";
+    cout << "PROJEK MANAJEMEN DATA SEKOLAH\n";
+    cout << "===============================\n";
+    cout << "1. Data Kelas\n";
+    cout << "2. Data Siswa\n";
+    cout << "3. Keluar\n";
+    cout << "Pilih Menu [1-3]: "; 
+    cin >> pilih;
 
-  switch (pilih) {
-    case 1:
-        // Mengelola data Kelas
-        do {
-            ambilDataKelas();
-            templateForm(28, "Kelas");
-            int pilihKelas;
-            cout << "Pilih menu: "; cin >> pilihKelas;
-            switch (pilihKelas) {
-                case 1: tambahDataKelas(dataKelas); break;
-                case 2: ubahDataKelas(dataKelas); break;
-                case 3: hapusDataKelas(dataKelas); break;
-                case 4: cetakDataKelas(dataKelas); break;
-                case 5: simpanDataKelas(dataKelas); break;
-                case 6: kembaliKeMenuUtama = true; break; // Kembali ke menu utama
-                default: cout << "Pilihan tidak valid!" << endl;
-            }
-        } while (!kembaliKeMenuUtama);  // Loop berlanjut hingga kembali ke menu utama
-        break;
+    switch (pilih) {
+      case 1:
+          // Mengelola data Kelas
+          do {
+              templateForm(28, "Kelas");
+              int pilihKelas;
+              cout << "Pilih menu: "; cin >> pilihKelas;
+              switch (pilihKelas) {
+                  case 1: tambahDataKelas(dataKelas); break;
+                  case 2: ubahDataKelas(dataKelas); break;
+                  case 3: hapusData(dataKelas); break;
+                  case 4: cetakDataKelas(dataKelas); break;
+                  case 5: simpanDataKelas(dataKelas); break;
+                  case 6: kembaliKeMenuUtama = true; break; // Kembali ke menu utama
+                  default: cout << "Pilihan tidak valid!" << endl;
+              }
+          } while (!kembaliKeMenuUtama);  // Loop berlanjut hingga kembali ke menu utama
+          break;
 
-    case 2:
-        // Mengelola data Siswa
-        do {
-          ambilDataSiswa();
-            templateForm(28, "Siswa");
-            int pilihSiswa;
-            cout << "Pilih menu: "; cin >> pilihSiswa;
-            switch (pilihSiswa) {
-                case 1: tambahDataSiswa(dataSiswa); break;
-                case 2: ubahDataSiswa(dataSiswa); break;
-                case 3: hapusDataSiswa(dataSiswa); break;
-                case 4: cetakDataSiswa(dataSiswa); break;
-                case 5: simpanDataSiswa(dataSiswa); break;
-                case 6: kembaliKeMenuUtama = true; break; // Kembali ke menu utama
-                default: cout << "Pilihan tidak valid!" << endl;
-            }
-        } while (!kembaliKeMenuUtama);  // Loop berlanjut hingga kembali ke menu utama
-        break;
+      case 2:
+          // Mengelola data Siswa
+          do {
+              templateForm(28, "Siswa");
+              int pilihSiswa;
+              cout << "Pilih menu: "; cin >> pilihSiswa;
+              switch (pilihSiswa) {
+                  case 1: tambahDataSiswa(dataSiswa); break;
+                  case 2: ubahDataSiswa(dataSiswa); break;
+                  case 3: hapusData(dataSiswa); break;
+                  case 4: cetakDataSiswa(dataSiswa); break;
+                  case 5: simpanDataSiswa(dataSiswa); break;
+                  case 6: kembaliKeMenuUtama = true; break; // Kembali ke menu utama
+                  default: cout << "Pilihan tidak valid!" << endl;
+              }
+          } while (!kembaliKeMenuUtama);  // Loop berlanjut hingga kembali ke menu utama
+          break;
 
-    case 3:
-        cout << "Terima kasih! Program selesai.\n";
-        break;
+      case 3:
+          cout << "Terima kasih! Program selesai.\n";
+          break;
 
-    default:
-        cout << "Pilihan tidak valid!" << endl;
+      default:
+          cout << "Pilihan tidak valid!" << endl;
     }
 
     // Reset flag kembaliKeMenuUtama untuk loop berikutnya
