@@ -54,7 +54,7 @@ void ambilDataSiswa() {
     string nama, nis, jk, ttl, kelas;
 
     // Membaca data dari file
-    while (data >> nama >> ws) {  // Membaca ID dan mengabaikan whitespace
+    while (getline(data, nama, '\t')) {  // Membaca ID dan mengabaikan whitespace
         getline(data, nis, '\t');  // Membaca nama kelas hingga tab
         data >> jk >> ws;  // Membaca wali kelas dan mengabaikan whitespace
         data >> ttl >> ws; // Membaca jumlah siswa dan mengabaikan whitespace
@@ -118,22 +118,22 @@ void cetakDataSiswa(vector<Siswa>& data) {
   }
 
   cout << "\nDATA SISWA YANG SUDAH DI TAMBAHKAN !!\n";
-  cout << string(70, '-') << endl; // Garis pemisah
-  cout << left << setw(15) << "Nama Siswa"
+  cout << string(85, '-') << endl; // Garis pemisah
+  cout << left << setw(25) << "Nama Siswa"
           << setw(12) << "NIS"
           << setw(15) << "Jenis Kelamin"
           << setw(15) << "ttl"
           << setw(15) << "Kelas" << endl;
-  cout << string(70, '-') << endl; // Garis pemisah
+  cout << string(85, '-') << endl; // Garis pemisah
 
   for (const auto& Siswa : data) {
-      cout << setw(15) << Siswa.nama
+      cout << setw(25) << Siswa.nama
               << setw(12) << Siswa.nis
               << setw(15) << Siswa.jk
               << setw(15) << Siswa.ttl
               << setw(15) << Siswa.kelas << endl;
   }
-  cout << string(70, '-') << endl; // Garis pemisah
+  cout << string(85, '-') << endl; // Garis pemisah
 }
 
 //! FUNGSI UNTUK MENYIMPAN DATA KE FILE
