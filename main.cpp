@@ -19,6 +19,12 @@ struct Siswa {
 };
 vector<Siswa> dataSiswa; // Membuat vector dari data siswa
 
+// DATA GURU
+struct Guru {
+    string nip, nama, jk, ttl, nomor;
+};
+vector<Guru> dataGuru; // Membuat vector dari data guru
+
 
 //! FUNGSI UNTUK MEMBACA DATA DARI FILE
 void ambilDataKelas() {
@@ -65,6 +71,31 @@ void ambilDataSiswa() {
 
     data.close();  // Menutup file setelah selesai
 }
+
+//! FUNGSI UNTUK MEMBACA DATA GURU
+void ambilDataGuru() {
+    ifstream data("data/guru.txt");  // Membuka file untuk dibaca
+    if (!data.is_open()) { // Memastikan file berhasil dibuka
+        cout << "File tidak ditemukan!" << endl;
+        return;
+    }
+
+    string nip, nama, jk, ttl, nomor;
+
+    // Membaca data dari file
+    while (getline(data, nip, '\t')) {  // Membaca NIP dan mengabaikan whitespace
+        getline(data, nama, '\t');  // Membaca nama guru hingga tab
+        getline(data, jk, '\t');  // Membaca jenis kelamin hingga tab
+        getline(data, ttl, '\t');  // Membaca TTL hingga tab
+        getline(data, nomor); // Membaca nomor telepon
+
+        // Menambahkan data ke vector dataGuru
+        dataGuru.push_back({nip, nama, jk, ttl, nomor});
+    }
+
+    data.close();  // Menutup file setelah selesai
+}
+
 
 //! FUNGSI UNTUK CETAK DATA KELAS
 
@@ -140,6 +171,36 @@ void cetakDataSiswa(vector<Siswa>& data) {
   cout << string(95, '-') << endl; // Garis pemisah
 }
 
+void cetakDataGuru() {
+    if (dataGuru.empty()) {
+        cout << "\nDATA GURU MASIH KOSONG, SILAHKAN MASUKKAN DATA DULU!!\n";
+        return;
+    }
+
+    cout << "\nDATA GURU YANG SUDAH DI TAMBAHKAN !!\n";
+    cout << string(95, '-') << endl; // Garis pemisah
+    cout << left << setw(5) << "No."
+            << setw(20) << "NIP"
+            << setw(25) << "Nama Guru"
+            << setw(15) << "Jenis Kelamin"
+            << setw(15) << "TTL"
+            << setw(15) << "Nomor" << endl;
+    cout << string(95, '-') << endl; // Garis pemisah
+
+    int nomor = 1;
+
+    for (const auto& guru : dataGuru) {
+        cout << setw(5) << nomor++
+              << setw(20) << guru.nip
+              << setw(25) << guru.nama
+              << setw(15) << guru.jk
+              << setw(15) << guru.ttl
+              << setw(15) << guru.nomor << endl;
+    }
+    cout << string(95, '-') << endl; // Garis pemisah
+}
+
+
 //! FUNGSI UNTUK MENYIMPAN DATA KE FILE
 void simpanDataKelas() {
   ofstream file("data/kelas.txt");
@@ -168,6 +229,21 @@ void simpanDataSiswa() {
 
   file.close();
 }
+
+void simpanDataGuru() {
+  ofstream file("data/guru.txt");
+
+  for (const auto& item : dataGuru) {
+    file << item.nip << "\t"
+          << item.nama << "\t"
+          << item.jk << "\t"
+          << item.ttl << "\t"
+          << item.nomor << endl;
+  }
+
+  file.close();
+}
+
 
 //! FUNGSI UNTUK MENAMBAH DATA
 
@@ -198,6 +274,22 @@ void tambahDataSiswa() {
   simpanDataSiswa();  // Menyimpan data secara langsung
   cout << "\nData Kelas Berhasil Ditambahkan Dan Disimpan kedalam file data/siswa.txt !!" << endl;
 }
+
+//! FUNGSI UNTUK MENAMBAH DATA GURU
+void tambahDataGuru() {
+  Guru g; // membuat variable dari referensi objek Guru
+  cin.ignore(); // Mengabaikan newline yang tersisa di buffer
+  cout << "Masukkan NIP: "; getline(cin, g.nip);
+  cout << "Masukkan Nama Guru: "; getline(cin, g.nama);
+  cout << "Masukkan Jenis Kelamin: "; getline(cin, g.jk);
+  cout << "Masukkan TTL [tgl-bln-thn]: "; getline(cin, g.ttl);
+  cout << "Masukkan Nomor Telepon: "; getline(cin, g.nomor);
+  
+  dataGuru.push_back(g);
+  simpanDataGuru();  // Menyimpan data secara langsung
+  cout << "\nData Guru Berhasil Ditambahkan Dan Disimpan kedalam file data/guru.txt !!" << endl;
+}
+
 
 //! FUNGSI UNTUK MENGUBAH DATA
 
@@ -256,6 +348,34 @@ void ubahDataSiswa() {
   cout << "Data Siswa berhasil di Ubah!" << endl;
 }
 
+void ubahDataGuru() {
+  if (dataGuru.empty()) {
+    cout << "\nTidak ada data yang tersedia untuk diubah." << endl;
+    return;
+  }
+  cetakDataGuru();
+
+  int index;
+  cout << "Masukkan nomor data yang ingin diubah (mulai dari 1): ";
+  cin >> index;
+
+  if (index < 1 || index > dataGuru.size()) {
+      cout << "Nomor tidak Valid!" << endl;
+      return;
+  }
+
+  Guru& g = dataGuru[index - 1]; // membuat variable dari referensi objek Guru
+  cin.ignore(); // Mengabaikan newline yang tersisa di buffer
+  cout << "Masukkan NIP: "; getline(cin, g.nip);
+  cout << "Masukkan Nama Guru: "; getline(cin, g.nama);
+  cout << "Masukkan Jenis Kelamin: "; getline(cin, g.jk);
+  cout << "Masukkan TTL [tgl-bln-thn]: "; getline(cin, g.ttl);
+  cout << "Masukkan Nomor Telepon: "; getline(cin, g.nomor);
+  simpanDataGuru();
+  cout << "Data Guru berhasil di Ubah!" << endl;
+}
+
+
 //! FUNGSI UNTUK MENGHAPUS DATA
 void hapusDataKelas() {
     if (dataKelas.empty()) {
@@ -295,6 +415,25 @@ void hapusDataSiswa() {
     cout << "\nData Berhasil Dihapus!!\n" << endl;
 }
 
+void hapusDataGuru() {
+    if (dataGuru.empty()) {
+        cout << "Tidak ada data untuk dihapus!!" << endl;
+        return;
+    }
+    cetakDataGuru();
+    int index;
+    cout << "Masukkan data yang ingin dihapus (mulai dari 1): ";
+    cin >> index;
+    if (index < 1 || index > dataGuru.size()) {
+        cout << "Nomor tidak valid" << endl;
+        return;
+    }
+
+    dataGuru.erase(dataGuru.begin() + index - 1);
+    simpanDataGuru();  // Menyimpan data secara langsung
+    cout << "\nData Berhasil Dihapus!!\n" << endl;
+}
+
 void templateForm(int a, string b) {
   cout << string(a,'-') << endl;
   cout << "Menu Pengelolaan Data "<< b << endl;
@@ -314,6 +453,7 @@ int main() {
 
   ambilDataKelas();  // Mengambil data dari file saat program dimulai
   ambilDataSiswa();  // Mengambil data dari file saat program dimulai
+  ambilDataGuru();  // Mengambil data dari file saat program dimulai
 
   do {
   // Menu utama
@@ -322,8 +462,9 @@ int main() {
   cout << "===============================\n";
   cout << "1. Data Kelas\n";
   cout << "2. Data Siswa\n";
-  cout << "3. Keluar\n";
-  cout << "Pilih Menu [1-3]: "; 
+  cout << "3. Data Guru\n";
+  cout << "4. Keluar\n";
+  cout << "Pilih Menu [1-4]: "; 
   cin >> pilih;
 
   switch (pilih) {
@@ -361,8 +502,24 @@ int main() {
             }
         } while (!kembaliKeMenuUtama);  // Loop berlanjut hingga kembali ke menu utama
         break;
-
     case 3:
+        // Mengelola data Guru
+        do {
+            templateForm(28, "Guru");
+            int pilihGuru;
+            cout << "Pilih menu: "; cin >> pilihGuru;
+            switch (pilihGuru) {
+                case 1: tambahDataGuru(); break;
+                case 2: ubahDataGuru(); break;
+                case 3: hapusDataGuru(); break;
+                case 4: cetakDataGuru(); break;
+                case 5: kembaliKeMenuUtama = true; break;
+                default: cout << "Pilihan tidak valid!" << endl;
+            }
+        } while (!kembaliKeMenuUtama);
+        break;
+
+    case 4:
         cout << "Terima kasih! Program selesai.\n";
         break;
 
