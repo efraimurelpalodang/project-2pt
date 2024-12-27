@@ -522,7 +522,6 @@ int main() {
     case 4:
         cout << "Terima kasih! Program selesai.\n";
         break;
-
     default:
         cout << "Pilihan tidak valid!" << endl;
     }
@@ -530,7 +529,7 @@ int main() {
     // Reset flag kembaliKeMenuUtama untuk loop berikutnya
     kembaliKeMenuUtama = false;
 
-  } while (pilih != 3);  // Loop kembali ke menu utama hingga pilih 3 untuk keluar
+  } while (pilih != 4);  // Loop kembali ke menu utama hingga pilih 3 untuk keluar
   
   return 0;
 }
