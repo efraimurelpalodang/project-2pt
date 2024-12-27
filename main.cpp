@@ -37,7 +37,7 @@ void ambilDataKelas() {
         getline(data, namaKelas, '\t');  // Membaca nama kelas hingga tab
         data >> wali >> ws;  // Membaca wali kelas dan mengabaikan whitespace
         data >> jumlahSiswa >> ws; // Membaca jumlah siswa dan mengabaikan whitespace
-        getline(data, tahunAjaran); // Membaca tahun ajaran (sampai akhir baris)
+        data >> tahunAjaran >> ws; // Membaca jumlah siswa dan mengabaikan whitespace
 
         // Menambahkan data ke vector dataKelas
         dataKelas.push_back({id, namaKelas, wali, tahunAjaran, jumlahSiswa});
@@ -61,7 +61,6 @@ void ambilDataSiswa() {
         data >> jk >> ws;  // Membaca wali kelas dan mengabaikan whitespace
         data >> ttl >> ws; // Membaca jumlah siswa dan mengabaikan whitespace
         getline(data, kelas); // Membaca tahun ajaran (sampai akhir baris)
-
         // Menambahkan data ke vector dataKelas
         dataSiswa.push_back({nama,nis,jk,ttl,kelas});
     }
