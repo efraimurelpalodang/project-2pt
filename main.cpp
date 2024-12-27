@@ -78,14 +78,16 @@ void cetakDataKelas() {
 
     cout << "\nDATA KELAS YANG SUDAH DI TAMBAHKAN !!\n";
     cout << string(85, '-') << endl; // Garis pemisah
-    cout << left << setw(10) << "ID"
+    cout << left << setw(5) << "No"
+            << setw(7) << "ID"
             << setw(20) << "Nama Kelas"
-            << setw(20) << "Wali Kelas"
-            << setw(15) << "Jumlah Siswa"
-            << setw(15) << "Tahun Ajaran" << endl;
+            << setw(25) << "Wali Kelas"
+            << setw(10) << "Siswa"
+            << setw(10) << "Ajaran" << endl;
     cout << string(85, '-') << endl; // Garis pemisah
 
     string id, namaKelas, wali, jumlahSiswa, tahunAjaran;
+    int nomor = 1;
     
     // Membaca dan mencetak data dari file
     while (file >> id >> ws) {
@@ -95,11 +97,12 @@ void cetakDataKelas() {
         file >> tahunAjaran >> ws; // Membaca tahun ajaran
 
         // Mencetak data kelas yang dibaca dari file
-        cout << setw(10) << id
+        cout<< setw(5)  << nomor++
+            << setw(7) << id
             << setw(20) << namaKelas
-            << setw(20) << wali
-            << setw(15) << jumlahSiswa
-            << setw(15) << tahunAjaran << endl;
+            << setw(25) << wali
+            << setw(10) << jumlahSiswa
+            << setw(10) << tahunAjaran << endl;
     }
 
     cout << string(85, '-') << endl; // Garis pemisah
@@ -266,7 +269,7 @@ void hapusDataKelas() {
 
     dataKelas.erase(dataKelas.begin() + index - 1);
     simpanDataKelas();  // Menyimpan data secara langsung
-    cout << "\nData Berhasil Dihapus!" << endl;
+    cout << "\nData Berhasil Dihapus!!\n" << endl;
 }
 
 void hapusDataSiswa() {
@@ -285,7 +288,7 @@ void hapusDataSiswa() {
 
     dataSiswa.erase(dataSiswa.begin() + index - 1);
     simpanDataSiswa();  // Menyimpan data secara langsung
-    cout << "\nData Berhasil Dihapus!" << endl;
+    cout << "\nData Berhasil Dihapus!!\n" << endl;
 }
 
 void templateForm(int a, string b) {
