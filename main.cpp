@@ -98,8 +98,8 @@ void ambilDataGuru() {
 }
 
 
-//! FUNGSI UNTUK CETAK DATA KELAS
-
+//! FUNGSI UNTUK CETAK DATA 
+// cetak data kelas
 void cetakDataKelas() {
     ifstream file("data/kelas.txt");
 
@@ -142,6 +142,7 @@ void cetakDataKelas() {
     file.close(); // Menutup file setelah selesai membaca
 }
 
+// cetak data siswa
 void cetakDataSiswa(vector<Siswa>& data) {
 
     if (data.empty()) {
@@ -172,6 +173,7 @@ void cetakDataSiswa(vector<Siswa>& data) {
   cout << string(95, '-') << endl; // Garis pemisah
 }
 
+// cetak data guru
 void cetakDataGuru() {
     if (dataGuru.empty()) {
         cout << "\nDATA GURU MASIH KOSONG, SILAHKAN MASUKKAN DATA DULU!!\n";
@@ -203,6 +205,7 @@ void cetakDataGuru() {
 
 
 //! FUNGSI UNTUK MENYIMPAN DATA KE FILE
+// simpan data kelas
 void simpanDataKelas() {
   ofstream file("data/kelas.txt");
 
@@ -217,6 +220,7 @@ void simpanDataKelas() {
   file.close();
 }
 
+// simpan data siswa
 void simpanDataSiswa() {
   ofstream file("data/siswa.txt");
 
@@ -231,6 +235,7 @@ void simpanDataSiswa() {
   file.close();
 }
 
+// simpan data guru
 void simpanDataGuru() {
   ofstream file("data/guru.txt");
 
@@ -247,7 +252,7 @@ void simpanDataGuru() {
 
 
 //! FUNGSI UNTUK MENAMBAH DATA
-
+// tambah data kelas
 void tambahDataKelas() {
   Kelas d; // membuat variable dari referensi objek kelas
   cin.ignore(); // Mengabaikan newline yang tersisa di buffer
@@ -262,6 +267,7 @@ void tambahDataKelas() {
   cout << "\nData Kelas Berhasil Ditambahkan Dan Disimpan kedalam file data/kelas.txt !!" << endl;
 }
 
+// tambah data siswa
 void tambahDataSiswa() {
   Siswa d; // membuat variable dari referensi objek Siswa
   cin.ignore(); // Mengabaikan newline yang tersisa di buffer
@@ -276,7 +282,7 @@ void tambahDataSiswa() {
   cout << "\nData Kelas Berhasil Ditambahkan Dan Disimpan kedalam file data/siswa.txt !!" << endl;
 }
 
-//! FUNGSI UNTUK MENAMBAH DATA GURU
+// tambah data guru
 void tambahDataGuru() {
   Guru g; // membuat variable dari referensi objek Guru
   cin.ignore(); // Mengabaikan newline yang tersisa di buffer
@@ -293,7 +299,7 @@ void tambahDataGuru() {
 
 
 //! FUNGSI UNTUK MENGUBAH DATA
-
+// ubah data kelas
 void ubahDataKelas() {
   if (dataKelas.empty()) {
     cout << "\nTidak ada data yang tersedia untuk diubah." << endl;
@@ -319,9 +325,10 @@ void ubahDataKelas() {
   cin.ignore(); // Mengabaikan newline yang tersisa di buffer
   cout << "Masukkan Tahun Ajaran: "; getline(cin, d.tahunAjaran);
   simpanDataKelas();  // Menyimpan data secara langsung
-  cout << "Data Kelas berhasil di Ubah!" << endl;
+  cout << "\nData Kelas berhasil di Ubah!!\n" << endl;
 }
 
+// ubah data siswa
 void ubahDataSiswa() {
   if (dataSiswa.empty()) {
     cout << "\nTidak ada data yang tersedia untuk diubah." << endl;
@@ -346,9 +353,10 @@ void ubahDataSiswa() {
   cout << "Masukkan ttl [tgl-bln-thn] : "; getline(cin, d.ttl);
   cout << "Masukkan Kelas: "; getline(cin, d.kelas);
   simpanDataSiswa();  // Menyimpan data secara langsung
-  cout << "Data Siswa berhasil di Ubah!" << endl;
+  cout << "\nData Siswa berhasil di Ubah!!\n" << endl;
 }
 
+// ubah data guru
 void ubahDataGuru() {
   if (dataGuru.empty()) {
     cout << "\nTidak ada data yang tersedia untuk diubah." << endl;
@@ -373,11 +381,12 @@ void ubahDataGuru() {
   cout << "Masukkan TTL [tgl-bln-thn]: "; getline(cin, g.ttl);
   cout << "Masukkan Nomor Telepon: "; getline(cin, g.nomor);
   simpanDataGuru();
-  cout << "Data Guru berhasil di Ubah!" << endl;
+  cout << "\nData Guru berhasil di Ubah!!\n" << endl;
 }
 
 
 //! FUNGSI UNTUK MENGHAPUS DATA
+// hapus data kelas
 void hapusDataKelas() {
     if (dataKelas.empty()) {
         cout << "Tidak ada data untuk dihapus!!" << endl;
@@ -397,6 +406,7 @@ void hapusDataKelas() {
     cout << "\nData Berhasil Dihapus!!\n" << endl;
 }
 
+// hapus data siswa
 void hapusDataSiswa() {
     if (dataSiswa.empty()) {
         cout << "Tidak ada data untuk dihapus!!" << endl;
@@ -416,6 +426,7 @@ void hapusDataSiswa() {
     cout << "\nData Berhasil Dihapus!!\n" << endl;
 }
 
+// hapus data guru
 void hapusDataGuru() {
     if (dataGuru.empty()) {
         cout << "Tidak ada data untuk dihapus!!" << endl;
@@ -435,6 +446,7 @@ void hapusDataGuru() {
     cout << "\nData Berhasil Dihapus!!\n" << endl;
 }
 
+// form template
 void templateForm(int a, string b) {
   cout << string(a,'-') << endl;
   cout << "Menu Pengelolaan Data "<< b << endl;
@@ -447,7 +459,6 @@ void templateForm(int a, string b) {
 }
 
 //! Program Utama
-
 int main() {
   int pilih;
   bool kembaliKeMenuUtama = false;
